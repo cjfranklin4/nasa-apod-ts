@@ -1,7 +1,10 @@
 import axios from 'axios';
 import { useState } from 'react';
 import Body from './components/Body';
+import Error from './components/Error';
 import Header from './components/Header';
+import {Box} from '@chakra-ui/react'
+import Placeholder from './components/Placeholder';
 const API_Key = process.env.REACT_APP_API_KEY;
 
 export type APIData = {
@@ -19,6 +22,7 @@ function App() {
   const [picDate, setpicDate] = useState('')
   const [imageData, setImageData] = useState<APIData | null>(null)
   const [errorMes, setErrorMes] = useState('')
+  const [placeholderTrue, setplaceholderTrue] = useState(true)
 
   const handleSubmit = (e: any) =>{
 
@@ -38,13 +42,15 @@ function App() {
 
   
   return (
-    <div className="App">
+    <Box>
       <Header handleSubmit={handleSubmit} setpicDate={(e) => setpicDate(e.target.value)} />
 
       {imageData ? <Body imageData={imageData} />: null}
 
-      {errorMes === '' ? null : errorMes}
-    </div>
+      {placeholderTrue ? <Placeholder/> : null}
+
+      {errorMes === '' ? null : <Error errorMes={errorMes} />}
+    </Box>
   );
 }
 
