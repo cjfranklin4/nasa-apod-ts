@@ -5,6 +5,7 @@ import Error from './components/Error';
 import Header from './components/Header';
 import {Box} from '@chakra-ui/react'
 import Placeholder from './components/Placeholder';
+import Footer from './components/Footer';
 const API_Key = process.env.REACT_APP_API_KEY;
 
 export type APIData = {
@@ -42,7 +43,7 @@ function App() {
 
   
   return (
-    <Box>
+    <Box display='flex' flexDirection='column' justifyContent='center' minH='100%'>
       <Header handleSubmit={handleSubmit} setpicDate={(e) => setpicDate(e.target.value)} />
 
       {imageData ? <Body imageData={imageData} />: null}
@@ -50,6 +51,7 @@ function App() {
       {placeholderTrue ? <Placeholder/> : null}
 
       {errorMes === '' ? null : <Error errorMes={errorMes} />}
+      <Footer />
     </Box>
   );
 }
